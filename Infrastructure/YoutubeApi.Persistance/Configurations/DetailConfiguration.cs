@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using YoutubeApi.Domain.Entities;
 
-namespace YoutubeApi.Persistance.Configurations
+namespace YoutubeApi.Persistence.Configurations
 {
 	public class DetailConfiguration : IEntityTypeConfiguration<Detail>
 	{
@@ -17,29 +17,28 @@ namespace YoutubeApi.Persistance.Configurations
 				Title = faker.Lorem.Sentence(1),
 				Description = faker.Lorem.Sentence(5),
 				CategoryId = 1,
-				CreatedDate = DateTime.Now,
-				IsDeleted = false
+				CreatedDate = DateTime.UtcNow,
+				IsDeleted = false,
 			};
-
 			Detail detail2 = new()
 			{
 				Id = 2,
 				Title = faker.Lorem.Sentence(2),
 				Description = faker.Lorem.Sentence(5),
 				CategoryId = 3,
-				CreatedDate = DateTime.Now,
-				IsDeleted = true
+				CreatedDate = DateTime.UtcNow,
+				IsDeleted = true,
 			};
-
 			Detail detail3 = new()
 			{
 				Id = 3,
 				Title = faker.Lorem.Sentence(1),
 				Description = faker.Lorem.Sentence(5),
 				CategoryId = 4,
-				CreatedDate = DateTime.Now,
-				IsDeleted = false
+				CreatedDate = DateTime.UtcNow,
+				IsDeleted = false,
 			};
+
 			builder.HasData(detail1, detail2, detail3);
 		}
 	}

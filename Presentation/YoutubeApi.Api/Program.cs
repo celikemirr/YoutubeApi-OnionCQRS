@@ -1,3 +1,9 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using YoutubeApi.Persistance;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,14 +15,18 @@ builder.Services.AddSwaggerGen();
 
 var env = builder.Environment;
 
-var app = builder.Build();
 
 //Aþaðýda yer alan kod block u
 //yapýlandýrma ayarlarýný yüklemek için kullanýlan bir konfigürasyon yapýlandýrma iþlemini tanýmlar
 
-builder.Configuration.SetBasePath(env.ContentRootPath)
-	.AddJsonFile("appsettings.json", optional:false)
-	.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional:true);
+builder.Configuration
+	.SetBasePath(env.ContentRootPath)
+	.AddJsonFile("appsettings.json", optional: false)
+	.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+
+builder.Services.AddPersistance(builder.Configuration);
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

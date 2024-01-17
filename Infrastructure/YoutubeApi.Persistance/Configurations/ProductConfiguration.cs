@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using YoutubeApi.Domain.Entities;
 
-namespace YoutubeApi.Persistance.Configurations
+namespace YoutubeApi.Persistence.Configurations
 {
 	public class ProductConfiguration : IEntityTypeConfiguration<Product>
 	{
@@ -19,10 +19,9 @@ namespace YoutubeApi.Persistance.Configurations
 				BrandId = 1,
 				Discount = faker.Random.Decimal(0, 10),
 				Price = faker.Finance.Amount(10, 1000),
-				CreatedDate = DateTime.Now,
-				IsDeleted = false
+				CreatedDate = DateTime.UtcNow,
+				IsDeleted = false,
 			};
-
 			Product product2 = new()
 			{
 				Id = 2,
@@ -31,8 +30,8 @@ namespace YoutubeApi.Persistance.Configurations
 				BrandId = 3,
 				Discount = faker.Random.Decimal(0, 10),
 				Price = faker.Finance.Amount(10, 1000),
-				CreatedDate = DateTime.Now,
-				IsDeleted = false
+				CreatedDate = DateTime.UtcNow,
+				IsDeleted = false,
 			};
 
 			builder.HasData(product1, product2);
